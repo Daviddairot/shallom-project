@@ -201,7 +201,7 @@ background: linear-gradient(120deg,#4783c7, #ffffff, );
 position: absolute;
 transform: translate(-50%, -50%);
 top: 60%;
-left: 50%;
+left: 60%;
 border-radius: 8px;
 box-shadow: 
   10px 10px 20px rgba(251, 251, 253, 0.5), /* Bottom-right shadow */
