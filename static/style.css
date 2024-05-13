@@ -201,7 +201,7 @@ background: linear-gradient(120deg,#4783c7, #ffffff, );
 position: absolute;
 transform: translate(-50%, -50%);
 top: 60%;
-left: 60%;
+left: 50%;
 border-radius: 8px;
 box-shadow: 
   10px 10px 20px rgba(251, 251, 253, 0.5), /* Bottom-right shadow */
@@ -314,7 +314,7 @@ color: #000; font-size: 10px; font-weight: lighter;
 header{
   position: fixed;
   left: 0;
-  top: 0;
+  top: 8vh;
   width: 100%;
   backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
