@@ -1,0 +1,96 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Shalom project </title>
+    <!-- link css -->
+    <style>
+        body {
+            background-color: #faf9f9;
+        }
+        
+        .container {
+            position: absolute;
+            top: 40%;
+            left: 50%;
+            transform:translate(-50%,-50%);
+        }
+        img {
+            width:30px;
+            object-fit: cover;
+            animation: float 3s ease-out infinite;
+            border-radius: 10px;
+            box-shadow: 
+                10px 10px 20px rgba(3, 3, 3, 0.2), /* Bottom-right shadow */
+                -10px -10px 20px rgba(3, 3, 3, 0.2), /* Top-left shadow */
+                10px -10px 20px rgba(8, 8, 8, 0.2), /* Top-right shadow */
+                -10px 10px 20px rgba(0, 0, 0, 0.2); /* Bottom-left shadow */
+        }
+        @keyframes float {
+            50% {
+            transform: translate(0, 60px);
+            }
+        }
+        .shadow {
+            position: absolute;
+            height:20px;
+            top: 160%;
+            left: 50%;
+            transform:translate(-50%,-50%);
+            border-radius: 50%;
+            background-color: rgba(0, 0, 0, 0.3);
+            filter: blur(3px);
+            animation: shrink 3s ease-out infinite;
+        }
+        @keyframes shrink {
+            0% {
+            width: 50%;
+            }
+            50% {
+            width: 30%;
+            }
+            100% {
+            width: 50%;
+            }
+        } 
+        @media(max-width:600px){
+            img{
+                width:150px;
+            }
+        }
+        footer{
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            backdrop-filter: blur(200px);
+            -webkit-backdrop-filter: blur(50px);
+            color: black; /* Adjust as needed */
+            text-align: center;
+            padding: 10px 0;
+            font-size: 9px
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="{% static 'download.png' %}" alt="">
+        <span class="shadow"></span>
+    </div>
+    <footer>
+        <span>By Shalom</span>
+    </footer>
+    <script>
+        // Function to redirect to the home page URL
+        function redirectToHomePage() {
+            window.location.href = "{% url 'index' %}"; // Assuming your home URL name is 'home'
+        }
+
+        // Delay the redirect by 7 seconds (7000 milliseconds)
+        setTimeout(redirectToHomePage, 11000);
+    </script>
+</body>
+</html>
