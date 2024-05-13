@@ -18,8 +18,7 @@ body {
   display: flex;
   place-items: center;
   justify-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+
 }
 
 .cont{
@@ -201,7 +200,7 @@ max-width: 350px;
 background: linear-gradient(120deg,#4783c7, #ffffff, );
 position: absolute;
 transform: translate(-50%, -50%);
-top: 50%;
+top: 70%;
 left: 50%;
 border-radius: 8px;
 box-shadow: 
