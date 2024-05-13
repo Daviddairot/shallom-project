@@ -200,7 +200,7 @@ max-width: 350px;
 background: linear-gradient(120deg,#4783c7, #ffffff, );
 position: absolute;
 transform: translate(-50%, -50%);
-top: 70%;
+top: 60%;
 left: 50%;
 border-radius: 8px;
 box-shadow: 
@@ -316,8 +316,8 @@ header{
   left: 0;
   top: 0;
   width: 100%;
-  backdrop-filter: blur(200px);
-    -webkit-backdrop-filter: blur(200px);
+  backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
   color: black; /* Adjust as needed */
   text-align: center;
   padding: 10px 0;
