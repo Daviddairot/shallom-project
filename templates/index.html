@@ -1,0 +1,222 @@
+{%load static%}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <title>iPhone 13 &amp; 14 - 2</title>
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Montserrat:500&amp;display=swap'>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <script src='https://code.jquery.com/jquery-3.4.1.min.js'></script>
+    <script src='https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js'></script>
+    <script src='https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js'></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Montserrat:500&amp;display=swap'>
+    <link rel="stylesheet" href="{% static 'iphone_13142.css' %}" />
+  </head>
+  <body>
+    <div class="iphone-13142">
+      <img class="rectangle-8" src="{% static 'rectangle_8_x2.svg'%}" />
+      <div class="container-6">
+        <div class="container-2">
+          <span class="airtel-ng">
+          </span>
+          <div class="group-6">
+            <div class="material-symbolswifi">
+            </div>
+          </div>
+        </div>
+        <div class="hello-shalom-its-arainy-day">
+        Hello, {{username}}<br />
+        Its a Rainy Day
+        </div>
+        <div>
+          <span></span>
+        </div>
+      </div>
+      <img class="container-5" src="{% static 'container_x2.svg'%}" />
+    </div>
+    <div class="main">
+      <div class="temp">
+        <span class="tem">&nbsp;Temperature</span>
+        <div id = "div1" class="content">
+          <div class="circular-progress">
+          <div class="value-container">0&deg;C</div>
+        </div>        
+      </div>
+      </div>
+      <div class="others">
+        <div class="two water">
+          <div class="progress progressn"></div>
+          <script src='https://cdn.jsdelivr.net/gh/tigrr/circle-progress@v0.2.4/dist/circle-progress.min.js'></script>
+        </br></br>
+          <span>&nbsp;&nbsp;&nbsp;&nbsp;  Smoke level</span>
+        </div>
+        <div class="two smoke">
+          <div class="bar-container" style="height: 500px;">
+            <div class="goal-bar">
+              <div class="bar-wrap">
+                <hr class="bar-line">
+                <hr class="bar-line">
+                <hr class="bar-line">
+                <hr class="bar-line">
+                <hr class="bar-line">
+                <hr class="bar-line">
+                <hr class="bar-line">
+                <hr class="bar-line">
+                <hr class="bar-line">
+                <hr class="bar-line">
+                <div
+                  class="bar yellow" style="transform: translateY(10%);">
+                  <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="500px" height="500px" viewBox="0 0 300 500" enable-background="new 0 0 300 500" xml:space="preserve" style="position:absolute;top:0;left:0;animation-name: waveAction; animation-iteration-count: infinite; animation-timing-function: linear; animation-duration: 1.5s; width: 300px; height: 500px; fill: rgb(4, 172, 255);"><path fill="#04ACFF" d="M300,300V2.5c0,0-0.6-0.1-1.1-0.1c0,0-25.5-2.3-40.5-2.4c-15,0-40.6,2.4-40.6,2.4c-12.3,1.1-30.3,1.8-31.9,1.9c-2-0.1-19.7-0.8-32-1.9c0,0-25.8-2.3-40.8-2.4c-15,0-40.8,2.4-40.8,2.4c-12.3,1.1-30.4,1.8-32,1.9c-2-0.1-20-0.8-32.2-1.9c0,0-3.1-0.3-8.1-0.7V500H300z" style="width:300px;height=500px" id="waveShape"></path></svg>
+                  <div class="bar-info">
+                    <div class="bar-info-inner"><span class="bar-label">100</span></div>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer class="foot">
+      <div>
+        <button class="item right" onclick="location.href='{% url 'statistics' %}';">Statistics</button>
+      </div>
+      <div>
+        <button class="item left" onclick="location.href='{% url 'Information' %}';"">Information</button>
+      </div>
+    </footer>
+  </body>
+  <script>
+    const MAX = 100;
+    let progressValu = 1;  // Initialize the progress value
+
+    // Initialize CircleProgress instance
+    const cp = new CircleProgress('.progress', {
+        max: MAX,
+        value: progressValu,
+        animationDuration: 40,
+        textFormat: (val) => val + '%',
+    });
+
+    // Function to set progress value and update the CircleProgress instance
+    function setProgressValue(newValue) {
+        progressValu = newValue;  // Update the variable
+        cp.value = progressValu;  // Update the CircleProgress instance
+        cp.el.style.setProperty('--progress-value', progressValu / MAX);  // Update CSS
+    }
+
+    // Function to fetch sensor data from the server and update the HTML
+    function fetchSensorData() {
+        $.ajax({
+            url: '/sensor-data/',  // Replace with your actual URL
+            type: 'GET',
+            success: function(data) {
+                // Update the HTML with the received sensor value
+                $('#sensor-value').text('Value: ' + data.value);
+
+                if (parseInt(data.value) >= 101) {
+                    // Show a popup notification using Toastr.js
+                    toastr.options = {
+                        "closeButton": true,
+                        "positionClass": "toast-top-right"
+                    };
+                    toastr.error('Smoke level is high! Please take action.');
+                }
+
+                // Update the input value
+                var inputValue = data.value;
+
+                // Call setProgressValue function to update the progress bar
+                setProgressValue(inputValue);
+            },
+            error: function(xhr, textStatus, errorThrown) {
+                console.log('Error fetching sensor data:', errorThrown);
+            }
+        });
+    }
+
+    // Fetch sensor data initially when the page loads
+    fetchSensorData();
+
+    // Periodically fetch sensor data every 5 seconds
+    setInterval(fetchSensorData, 5000); // 5000 milliseconds = 5 seconds
+  </script>
+     <script>
+      // Define the fetchTempData function to make the AJAX request
+      function fetchTempData() {
+          $.ajax({
+              url: '/temp/',  // Replace with the actual URL of your Django view
+              type: 'GET',
+              dataType: 'json',
+              success: function(data) {
+                  // Handle the response data here
+                  console.log('Received temperature data:', data);
+                  let progressBar = document.querySelector(".circular-progress");
+                  let valueContainer = document.querySelector(".value-container");
+                  let speed = 50;
+  
+                  // Use the received data to update progressEndValue
+                  let progressEndValue = data.new_value;
+  
+                  // Initialize progressValue and start the progress animation
+                  let progressValue = 0;
+                  let progress = setInterval(() => {
+                      progressValue++;
+                      valueContainer.textContent = `${progressValue}°C`;
+                      progressBar.style.background = `conic-gradient(
+                          #019F00 ${progressValue * 3.6}deg,
+                          #cadcff ${progressValue * 3.6}deg
+                      )`;
+                      if (progressValue == progressEndValue) {
+                          clearInterval(progress);
+                      }
+                  }, speed);
+              },
+              error: function(xhr, textStatus, errorThrown) {
+                  console.log('Error fetching temperature data:', errorThrown);
+              }
+          });
+      }
+  
+      // Call fetchTempData initially and then at regular intervals
+      fetchTempData(); // Call initially
+      setInterval(fetchTempData, 5000); // Call every 5 seconds (adjust interval as needed)
+  </script>
+  <script>
+    $(document).ready(function() {
+        // Function to update the value periodically
+        function updateValue() {
+            $.ajax({
+                url: '/update_value/',  // URL to your Django view
+                type: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                    // Update the value inside the <span class="bar-label"> element
+                    $('.bar-label').text(data.new_value);
+                    // Check if new_value is greater than or equal to 80
+                    if (parseInt(data.new_value) >= 80) {
+                      // Show a popup notification using Toastr.js
+                      toastr.options = {
+                          "closeButton": true,
+                          "positionClass": "toast-top-right"
+                      };
+                      toastr.error('Water level is high! Please take action.');
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error:', error);
+                }
+            });
+        }
+    
+        // Call the updateValue function initially
+        updateValue();
+    
+        // Set interval to call the updateValue function every 5 seconds (5000 milliseconds)
+        setInterval(updateValue, 5000); // Adjust interval as needed
+    });
+  </script>
+
+</html>

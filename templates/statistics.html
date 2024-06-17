@@ -1,0 +1,74 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{%static 'style.css'%}"/>
+
+</head>
+<body>
+    <div>
+        <a href="{%url 'index'%}">back</a>
+    </div>
+    <div id="sensor-data-container">
+        <!-- Placeholder for the latest sensor data -->
+    </div>
+
+    <footer class="foot">
+        <div>
+          <button class="item right" onclick="location.href='{% url 'statistics' %}';">Statistics</button>
+        </div>
+        <div>
+          <button class="item left" onclick="location.href='{% url 'Information' %}';"">Information</button>
+        </div>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        const maxEntries = 20; // Set the maximum number of entries to display
+
+        function updateSensorData() {
+            $.ajax({
+                url: '{% url "latest_sensor_data" %}',
+                type: 'GET',
+                success: function(data) {
+                    const container = $('#sensor-data-container');
+
+                    // Check if sensor data is available
+                    if (data.value !== null) {
+                        const sensorDataHtml = `
+                            <div class="sensor-data-item">
+                                <span>Smoke level: ${data.value}</span> |
+                                <span>Water level: ${data.water}</span> |
+                                <span>Temperature: ${data.temp}</span> |
+                                <span>Created at: ${new Date(data.created_at).toLocaleString()}</span>
+                            </div>
+                        `;
+
+                        // Append the new data at the top
+                        container.prepend(sensorDataHtml);
+
+                        // Limit the number of displayed entries to maxEntries
+                        const items = container.children('.sensor-data-item');
+                        if (items.length > maxEntries) {
+                            items.last().remove();
+                        }
+                    } else {
+                        container.prepend('<div class="sensor-data-item">No sensor data available.</div>');
+                    }
+                },
+                error: function(xhr, textStatus, errorThrown) {
+                    console.error('Error fetching sensor data:', errorThrown);
+                }
+            });
+        }
+
+        // Fetch sensor data initially when the page loads
+        updateSensorData();
+
+        // Periodically fetch sensor data every 4 seconds
+        setInterval(updateSensorData, 4000); // 4000 milliseconds = 4 seconds
+    </script>
+</body>
+</html>

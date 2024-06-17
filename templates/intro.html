@@ -1,0 +1,67 @@
+{%load static%}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Shaloms project</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'iphone_13141.css'%}" />
+  </head>
+  <body>
+    <div class="iphone-13141">
+      <img class="rectangle-2" src="{% static 'rectangle_2_x2.svg'%}" />
+      <div class="container-5">
+        <div class="container-1">
+          <div class="container">
+            <div class="airtel-ng">
+            </div>
+            <img class="vector-9" src="{% static 'vector_3_x2.svg'%}" />
+            <img class="vector-8" src="{% static 'vector_1_x2.svg'%}" />
+          </div>
+          <img class="vector-13" src="{% static 'vector_12_x2.svg'%}" />
+          <img class="vector-11" src="{% static 'vector_14_x2.svg'%}" />
+          <img class="vector-12" src="{% static 'vector_13_x2.svg'%}" />
+          <img class="vector-10" src="{% static 'vector_4_x2.svg'%}" />
+          <div class="container-3">
+            <div class="group-5">
+              <div class="material-symbolswifi">
+              </div>
+            </div>
+            <img class="vector-6" src="{%static 'vector_11_x2.svg'%}" />
+          </div>
+        </div>
+        <div>
+        <img class="container-4" src="{%static 'container_1_x2.svg'%}" />
+        </div>
+        <div class="house">
+          <img class="vector-14" src="{%static 'vector_6_x2.svg'%}" />
+          <form method="post">
+            {% csrf_token %}
+            <div>
+              <input class="int" name="username" placeholder="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Email" type="text"/>
+            </div>
+            <div>
+              <input class="int" name="password" placeholder="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Password" type="password"/>
+            </div>
+            {% if messages %}
+                <ul>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+            <div>
+              <input class="btn" type="submit" placeholder="Sign in">
+            </div>
+          </form>
+        </div>
+        <div>
+          <span>Don't have an accout&nbsp;<a href="#">sign up</a></span>
+        </div>
+      </div>
+  </body>
+</html>
