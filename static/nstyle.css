@@ -1,0 +1,32 @@
+footer{
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    height: 5vh;
+    width: 100%;
+    backdrop-filter: blur(200px);
+    -webkit-backdrop-filter: blur(200px);
+    color: black; /* Adjust as needed */
+    text-align: center;
+    padding: 10px 0;
+    font-size: 29px
+    }
+  
+  .foot{
+    display: grid; /* Use inline-grid instead of grid */
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0;
+  }
+  .item{
+    width: 100%;
+    height: 9vh;
+    border: 0;
+  }
+  .right{
+    border-top-right-radius: 10px;
+  }
+  .left{
+    border-top-left-radius: 10px;
+    background-color: #000000;
+    color: aliceblue;
+  }
