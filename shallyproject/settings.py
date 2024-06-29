@@ -12,7 +12,11 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 import os
-from .secret_key_util import get_or_create_secret_key, rotate_secret_key
+import random
+import string
+import time
+import hashlib
+
 
 
 
@@ -24,7 +28,21 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-rx19=!&r@@n2a@mtw(3@+yf=n=&+8pd3gk-2tm_$n2i89it#3j'
+
+def generate_secret_key():
+    """Generate a random SECRET_KEY."""
+    current_time = time.time()
+    random.seed(current_time)
+    key_characters = string.ascii_letters + string.digits + string.punctuation
+    random_string = ''.join(random.choices(key_characters, k=50))
+    
+    # Create a hash to ensure the SECRET_KEY format
+    hashed_key = hashlib.sha256(random_string.encode()).hexdigest()
+    return hashed_key
+
+# Use the dynamically generated SECRET_KEY
+SECRET_KEY = generate_secret_key()
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
