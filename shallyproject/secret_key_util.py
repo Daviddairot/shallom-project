@@ -1,4 +1,3 @@
-# secret_key_util.py
 import os
 import random
 import string
